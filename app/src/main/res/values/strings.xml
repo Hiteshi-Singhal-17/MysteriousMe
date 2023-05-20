@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MysteriousMe</string>
-    <string name="name">Flavia Augusta</string>
     <string name="bio">"Flavia Augusta: A Spirited Adventurer Unleashing Creativity
 Flavia Augusta is a dynamic soul with an insatiable thirst for adventure and a deep passion for creativity. Born with an innate curiosity, Flavia has always sought out novel experiences and embraced challenges as opportunities for growth.
 
@@ -16,4 +15,5 @@ Flavia Augusta's magnetic energy and zest for life are contagious, drawing peopl
     </string>
     <string name="yellow_star">yellow star\n</string>
     <string name="what_is_your_nickname">What is your nickname ?</string>
+    <string name="done">Done</string>
 </resources>

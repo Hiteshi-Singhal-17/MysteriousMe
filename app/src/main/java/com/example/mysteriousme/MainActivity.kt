@@ -4,19 +4,20 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.example.mysteriousme.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private val myName: MyName = MyName("Flavia Augusta")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        // Get the reference of done button
-        val doneButton = findViewById<Button>(R.id.done_button)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.myName = myName
         // Set on click listener on done button
-        doneButton.setOnClickListener {
+        binding.doneButton.setOnClickListener {
             addNickname(it)
         }
     }
@@ -25,17 +26,18 @@ class MainActivity : AppCompatActivity() {
      * Displays the nickname in edit text view and hides the button and text view
      */
     private fun addNickname(view: View) {
-        // Get the reference of nickname edit and text view
-        val nicknameEdit = findViewById<EditText>(R.id.nickname_edit)
-        val nicknameText = findViewById<TextView>(R.id.nickname_text)
-
-        // Set the text of nickname text view
-        nicknameText.text = nicknameEdit.text
-
         // Change the visibility of views
-        nicknameText.visibility = View.VISIBLE
-        nicknameEdit.visibility = View.GONE
-        view.visibility = View.GONE
+        binding.apply {
+            // Two way binding since data source is changed, consequently view will also be changed
+            myName?.nickname = nicknameEdit.text.toString()
+            // To force a refresh and ensure changes made to data model or view properties
+            // are immediately reflected in the UI
+            invalidateAll()
+            nicknameText.visibility = View.VISIBLE
+            nicknameEdit.visibility = View.GONE
+            view.visibility = View.GONE
+
+        }
 
         // Hide the device software keyboard
         /* Get the system service responsible for managing the input methods. In this case, obtain
